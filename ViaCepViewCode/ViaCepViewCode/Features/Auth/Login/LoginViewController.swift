@@ -7,8 +7,14 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class LoginViewController: UIViewController {
+    var screen: LoginScreen?
+    
+    override func loadView() {
+        screen = LoginScreen()
+        view = screen
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
