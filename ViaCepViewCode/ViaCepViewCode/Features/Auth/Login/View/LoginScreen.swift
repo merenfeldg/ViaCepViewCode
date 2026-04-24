@@ -7,6 +7,61 @@
 
 import UIKit
 
-class LoginScreen: UIView {
+final class LoginScreen: UIView {
+    lazy var emailTextField: DSTextField = {
+        return DSTextField(
+            title: "Email",
+            placeholder: "Digite seu email...",
+            leftIcon: .envelope
+        )
+    }()
     
+    lazy var passwordTextField: DSTextField = {
+        return DSTextField(
+            title: "Password",
+            placeholder: "Digite sua senha...",
+            leftIcon: .lock
+        )
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension LoginScreen {
+    private func configView() {
+        backgroundColor = .white
+        addElements()
+        disableTranslatesAutoresizingMaskInAllElements()
+        configConstraints()
+    }
+    
+    private func addElements() {
+        addSubview(emailTextField)
+        addSubview(passwordTextField)
+    }
+    
+    private func disableTranslatesAutoresizingMaskInAllElements() {
+        subviews.forEach { element in
+            element.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
+    
+    private func configConstraints() {
+        NSLayoutConstraint.activate([
+            emailTextField.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            emailTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            emailTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            
+            passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 16),
+            passwordTextField.leadingAnchor.constraint(equalTo: emailTextField.leadingAnchor),
+            passwordTextField.trailingAnchor.constraint(equalTo: emailTextField.trailingAnchor)
+        ])
+    }
 }
