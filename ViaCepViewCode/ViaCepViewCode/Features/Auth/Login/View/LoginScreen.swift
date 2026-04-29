@@ -24,6 +24,13 @@ final class LoginScreen: UIView {
         )
     }()
     
+    lazy var primaryButton: DSPrimaryButton = {
+        return DSPrimaryButton(
+            title: "Login",
+            action: {},
+        )
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configView()
@@ -45,6 +52,7 @@ extension LoginScreen {
     private func addElements() {
         addSubview(emailTextField)
         addSubview(passwordTextField)
+        addSubview(primaryButton)
     }
     
     private func disableTranslatesAutoresizingMaskInAllElements() {
@@ -61,7 +69,11 @@ extension LoginScreen {
             
             passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 16),
             passwordTextField.leadingAnchor.constraint(equalTo: emailTextField.leadingAnchor),
-            passwordTextField.trailingAnchor.constraint(equalTo: emailTextField.trailingAnchor)
+            passwordTextField.trailingAnchor.constraint(equalTo: emailTextField.trailingAnchor),
+            
+            primaryButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 16),
+            primaryButton.leadingAnchor.constraint(equalTo: emailTextField.leadingAnchor),
+            primaryButton.trailingAnchor.constraint(equalTo: emailTextField.trailingAnchor)
         ])
     }
 }
