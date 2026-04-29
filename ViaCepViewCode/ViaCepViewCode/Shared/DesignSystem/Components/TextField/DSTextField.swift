@@ -14,9 +14,9 @@ final class DSTextField: UIView {
     let keyBoardType: UIKeyboardType
     
     lazy var container: UIView = {
-        let container = UIView()
-        
-        container.backgroundColor = .yellow
+        let container = UIView(
+            frame: CGRect(x: 0, y: 0, width: 40, height: 40)
+        )
         
         return container
     }()
@@ -38,9 +38,13 @@ final class DSTextField: UIView {
     }()
     
     lazy var iconImage: UIImageView = {
-        let icon = UIImageView(image: UIImage(systemName: leftIcon.outlinedIcon))
+        let icon = UIImageView(
+            frame: CGRect(x: 10, y: 0, width: 24, height: 20)
+        )
         
+        icon.image = UIImage(systemName: leftIcon.outlinedIcon)
         icon.tintColor = .gray
+        icon.contentMode = .scaleAspectFit
         
         return icon
     }()
@@ -59,7 +63,7 @@ final class DSTextField: UIView {
         super.init(frame: .zero)
         configView()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -76,7 +80,6 @@ extension DSTextField {
     
     private func addElements() {
         addSubview(textField)
-        addSubview(iconImage)
         container.addSubview(iconImage)
     }
     
@@ -94,11 +97,10 @@ extension DSTextField {
             textField.trailingAnchor.constraint(equalTo: trailingAnchor),
             textField.heightAnchor.constraint(equalToConstant: 56),
             
-            container.heightAnchor.constraint(equalToConstant: 30),
-            container.widthAnchor.constraint(equalToConstant: 30),
-            
             iconImage.centerYAnchor.constraint(equalTo: container.centerYAnchor),
             iconImage.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+            iconImage.widthAnchor.constraint(equalToConstant: 20),
+            iconImage.heightAnchor.constraint(equalToConstant: 20),
         ])
     }
 }
