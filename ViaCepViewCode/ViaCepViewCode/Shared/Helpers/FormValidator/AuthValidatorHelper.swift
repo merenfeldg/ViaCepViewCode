@@ -19,11 +19,11 @@ struct FormValidatorHelper {
     }
     
     static func isEmailValid(_ email: String) -> Bool {
-        if case .failure(let error) = verifyEmptyText(email) {
+        if case .failure = verifyEmptyText(email) {
             return false
         }
         
-        if case .failure(let error) = verifyEmailFormatValid(email) {
+        if case .failure = verifyEmailFormatValid(email) {
             return false
         }
         
@@ -31,11 +31,11 @@ struct FormValidatorHelper {
     }
     
     static func isPasswordValid(_ password: String) -> Bool {
-        if case .failure(let error) = verifyEmptyText(password) {
+        if case .failure = verifyEmptyText(password) {
             return false
         }
         
-        if case .failure(let error) = verifyPasswordHasMore5Character(password) {
+        if case .failure = verifyPasswordHasMore5Character(password) {
             return false
         }
         
