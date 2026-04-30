@@ -10,44 +10,44 @@ import Foundation
 typealias FormResult = Result<Void, FormValidatorError>
 
 struct FormValidatorHelper {
-    static func isValidName(_ text: String) -> FormResult {
-        if case .failure(let error) = verifyEmptyText(text) {
-            return .failure(error)
+    static func isValidName(_ text: String) -> Bool {
+        if case .failure = verifyEmptyText(text) {
+            return false
         }
         
-        return .success(())
+        return true
     }
     
-    static func isEmailValid(_ email: String) -> FormResult {
+    static func isEmailValid(_ email: String) -> Bool {
         if case .failure(let error) = verifyEmptyText(email) {
-            return .failure(error)
+            return false
         }
         
         if case .failure(let error) = verifyEmailFormatValid(email) {
-            return .failure(error)
+            return false
         }
         
-        return .success(())
+        return true
     }
     
-    static func isPasswordValid(_ password: String) -> FormResult {
+    static func isPasswordValid(_ password: String) -> Bool {
         if case .failure(let error) = verifyEmptyText(password) {
-            return .failure(error)
+            return false
         }
         
         if case .failure(let error) = verifyPasswordHasMore5Character(password) {
-            return .failure(error)
+            return false
         }
         
-        return .success(())
+        return true
     }
     
-    static func isConfirmPasswordValid(password: String, otherPassowrd: String) -> FormResult {
+    static func isConfirmPasswordValid(password: String, otherPassowrd: String) -> Bool {
         if case .failure(let error) = verifyPasswordsMatch(password: password, otherPassword: otherPassowrd) {
-            return .failure(error)
+            return false
         }
         
-        return .success(())
+        return true
     }
 }
 
