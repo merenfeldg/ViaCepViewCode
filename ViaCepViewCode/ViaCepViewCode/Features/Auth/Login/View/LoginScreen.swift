@@ -8,6 +8,28 @@
 import UIKit
 
 final class LoginScreen: UIView {
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        
+        label.text = "Bem-vindo de volta!"
+        label.font = .boldSystemFont(ofSize: 24)
+        label.textAlignment = .center
+        
+        return label
+    }()
+    
+    private lazy var descriptionLabel: UILabel = {
+        let label = UILabel()
+        
+        label.text = "Digite suas informações para continuar."
+        label.textColor = .gray
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 16)
+        label.numberOfLines = 0
+        
+        return label
+    }()
+    
     private lazy var emailTextField: DSTextField = {
         return DSTextField(
             title: "Email",
@@ -41,6 +63,7 @@ final class LoginScreen: UIView {
     }
 }
 
+// MARK: - CONFIG VIEW
 extension LoginScreen {
     private func configView() {
         backgroundColor = .white
@@ -50,8 +73,12 @@ extension LoginScreen {
     }
     
     private func addElements() {
+        addSubview(titleLabel)
+        addSubview(descriptionLabel)
+        
         addSubview(emailTextField)
         addSubview(passwordTextField)
+        
         addSubview(primaryButton)
     }
     
@@ -63,15 +90,23 @@ extension LoginScreen {
     
     private func configConstraints() {
         NSLayoutConstraint.activate([
-            emailTextField.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-            emailTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            emailTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            titleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 80),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            
+            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
+            descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            descriptionLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+            
+            emailTextField.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 36),
+            emailTextField.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            emailTextField.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
             
             passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 16),
             passwordTextField.leadingAnchor.constraint(equalTo: emailTextField.leadingAnchor),
             passwordTextField.trailingAnchor.constraint(equalTo: emailTextField.trailingAnchor),
             
-            primaryButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 16),
+            primaryButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 36),
             primaryButton.leadingAnchor.constraint(equalTo: emailTextField.leadingAnchor),
             primaryButton.trailingAnchor.constraint(equalTo: emailTextField.trailingAnchor)
         ])
