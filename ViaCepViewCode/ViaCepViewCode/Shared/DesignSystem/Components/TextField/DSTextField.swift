@@ -8,7 +8,7 @@
 import UIKit
 
 final class DSTextField: UIView {
-    let title: String
+    let title: String?
     let placeholder: String
     let leftIcon: DSIconsTextField
     let keyBoardType: UIKeyboardType
@@ -49,8 +49,27 @@ final class DSTextField: UIView {
         return icon
     }()
     
+    lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        
+        label.text = title
+        label.font = .boldSystemFont(ofSize: 12)
+        label.textAlignment = .left
+        
+        return label
+    }()
+    
+    lazy var verticalStackView: UIStackView = {
+        let stackView = UIStackView()
+        
+        stackView.axis = .vertical
+        stackView.spacing = 4
+        
+        return stackView
+    }()
+    
     init(
-        title: String,
+        title: String? = nil,
         placeholder: String,
         leftIcon: DSIconsTextField,
         keyBoardType: UIKeyboardType = .default
@@ -79,8 +98,15 @@ extension DSTextField {
     }
     
     private func addElements() {
-        addSubview(textField)
-        container.addSubview(iconImage)
+        if title != nil {
+            addSubview(verticalStackView)
+            verticalStackView.addArrangedSubview(titleLabel)
+            verticalStackView.addArrangedSubview(textField)
+            container.addSubview(iconImage)
+        } else {
+            addSubview(textField)
+            container.addSubview(iconImage)
+        }
     }
     
     private func disableTranslatesAutoresizingMaskInAllElements() {
@@ -90,18 +116,32 @@ extension DSTextField {
     }
     
     private func configConstraints() {
-        NSLayoutConstraint.activate([
-            textField.topAnchor.constraint(equalTo: topAnchor),
-            textField.bottomAnchor.constraint(equalTo: bottomAnchor),
-            textField.leadingAnchor.constraint(equalTo: leadingAnchor),
-            textField.trailingAnchor.constraint(equalTo: trailingAnchor),
+        var constraints: [NSLayoutConstraint] = [
             textField.heightAnchor.constraint(equalToConstant: 56),
             
             iconImage.centerYAnchor.constraint(equalTo: container.centerYAnchor),
             iconImage.centerXAnchor.constraint(equalTo: container.centerXAnchor),
             iconImage.widthAnchor.constraint(equalToConstant: 20),
             iconImage.heightAnchor.constraint(equalToConstant: 20),
-        ])
+        ]
+        
+        if title != nil {
+            constraints += [
+                verticalStackView.topAnchor.constraint(equalTo: topAnchor),
+                verticalStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+                verticalStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                verticalStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            ]
+        } else {
+            constraints += [
+                textField.topAnchor.constraint(equalTo: topAnchor),
+                textField.bottomAnchor.constraint(equalTo: bottomAnchor),
+                textField.leadingAnchor.constraint(equalTo: leadingAnchor),
+                textField.trailingAnchor.constraint(equalTo: trailingAnchor),
+            ]
+        }
+        
+        NSLayoutConstraint.activate(constraints)
     }
 }
 

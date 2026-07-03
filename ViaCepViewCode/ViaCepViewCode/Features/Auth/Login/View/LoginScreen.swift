@@ -18,9 +18,9 @@ final class LoginScreen: UIView {
     
     lazy var passwordTextField: DSTextField = {
         return DSTextField(
-            title: "Password",
+            title: "Senha",
             placeholder: "Digite sua senha...",
-            leftIcon: .lock
+            leftIcon: .lock,
         )
     }()
     
