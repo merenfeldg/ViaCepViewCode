@@ -43,7 +43,7 @@ struct FormValidatorHelper {
     }
     
     static func isConfirmPasswordValid(password: String, otherPassowrd: String) -> Bool {
-        if case .failure(let error) = verifyPasswordsMatch(password: password, otherPassword: otherPassowrd) {
+        if case .failure = verifyPasswordsMatch(password: password, otherPassword: otherPassowrd) {
             return false
         }
         
