@@ -53,6 +53,13 @@ final class LoginScreen: UIView {
         )
     }()
     
+    private lazy var secondaryButton: DSSecondaryButton = {
+        return DSSecondaryButton(
+            title: "Se registrar",
+            action: {},
+        )
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configView()
@@ -80,6 +87,7 @@ extension LoginScreen {
         addSubview(passwordTextField)
         
         addSubview(primaryButton)
+        addSubview(secondaryButton)
     }
     
     private func disableTranslatesAutoresizingMaskInAllElements() {
@@ -103,12 +111,16 @@ extension LoginScreen {
             emailTextField.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
             
             passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 16),
-            passwordTextField.leadingAnchor.constraint(equalTo: emailTextField.leadingAnchor),
-            passwordTextField.trailingAnchor.constraint(equalTo: emailTextField.trailingAnchor),
+            passwordTextField.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            passwordTextField.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
             
             primaryButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 36),
-            primaryButton.leadingAnchor.constraint(equalTo: emailTextField.leadingAnchor),
-            primaryButton.trailingAnchor.constraint(equalTo: emailTextField.trailingAnchor)
+            primaryButton.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            primaryButton.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+            
+            secondaryButton.topAnchor.constraint(equalTo: primaryButton.bottomAnchor, constant: 16),
+            secondaryButton.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            secondaryButton.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor)
         ])
     }
 }
