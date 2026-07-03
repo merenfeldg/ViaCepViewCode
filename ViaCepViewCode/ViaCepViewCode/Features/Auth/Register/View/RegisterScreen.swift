@@ -69,6 +69,13 @@ final class RegisterScreen: UIView {
         )
     }()
     
+    private lazy var secondaryButton: DSSecondaryButton = {
+        return DSSecondaryButton(
+            title: "Se registrar",
+            action: {},
+        )
+    }()
+    
     init() {
         super.init(frame: .zero)
         configView()
@@ -98,6 +105,7 @@ extension RegisterScreen {
         addSubview(confirmPasswordTextField)
         
         addSubview(primaryButton)
+        addSubview(secondaryButton)
     }
     
     private func disableTranslatesAutoresizingMaskInAllElements() {
@@ -134,7 +142,11 @@ extension RegisterScreen {
             
             primaryButton.topAnchor.constraint(equalTo: confirmPasswordTextField.bottomAnchor, constant: 36),
             primaryButton.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            primaryButton.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor)
+            primaryButton.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+            
+            secondaryButton.topAnchor.constraint(equalTo: primaryButton.bottomAnchor, constant: 16),
+            secondaryButton.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            secondaryButton.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor)
         ])
     }
 }
