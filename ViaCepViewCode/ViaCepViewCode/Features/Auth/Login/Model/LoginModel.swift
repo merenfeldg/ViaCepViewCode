@@ -6,6 +6,6 @@
 //
 
 struct LoginModel {
-    let email: String
-    let password: String
+    var email: String
+    var password: String
 }
