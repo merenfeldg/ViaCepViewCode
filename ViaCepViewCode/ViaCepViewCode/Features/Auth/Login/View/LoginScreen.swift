@@ -8,7 +8,7 @@
 import UIKit
 
 final class LoginScreen: UIView {
-    lazy var emailTextField: DSTextField = {
+    private lazy var emailTextField: DSTextField = {
         return DSTextField(
             title: "Email",
             placeholder: "Digite seu email...",
@@ -16,7 +16,7 @@ final class LoginScreen: UIView {
         )
     }()
     
-    lazy var passwordTextField: DSTextField = {
+    private lazy var passwordTextField: DSTextField = {
         return DSTextField(
             title: "Senha",
             placeholder: "Digite sua senha...",
@@ -24,7 +24,7 @@ final class LoginScreen: UIView {
         )
     }()
     
-    lazy var primaryButton: DSPrimaryButton = {
+    private lazy var primaryButton: DSPrimaryButton = {
         return DSPrimaryButton(
             title: "Login",
             action: {},
