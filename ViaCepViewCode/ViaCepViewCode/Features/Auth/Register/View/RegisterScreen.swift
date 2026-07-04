@@ -9,6 +9,7 @@ import UIKit
 
 final class RegisterScreen: UIView {
     var model = RegisterModel()
+    var delegate: RegisterScreenDelegate?
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -71,14 +72,14 @@ final class RegisterScreen: UIView {
     private lazy var primaryButton: DSPrimaryButton = {
         return DSPrimaryButton(
             title: "Cadastrar",
-            action: {},
+            action: didTapPrimaryButton,
         )
     }()
     
     private lazy var secondaryButton: DSSecondaryButton = {
         return DSSecondaryButton(
             title: "Se registrar",
-            action: {},
+            action: didTapSecondaryButton,
         )
     }()
     
@@ -89,6 +90,10 @@ final class RegisterScreen: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setDelegateProtocol(_ delegate: RegisterScreenDelegate) {
+        self.delegate = delegate
     }
 }
 
@@ -108,6 +113,17 @@ extension RegisterScreen {
     
     private func setConfirmPassword(_ confirmPassword: String) {
         model.password = confirmPassword
+    }
+}
+
+// MARK: - ACTIONS
+extension RegisterScreen {
+    private func didTapPrimaryButton() {
+        delegate?.didTapPrimaryButton()
+    }
+    
+    private func didTapSecondaryButton() {
+        delegate?.didTapSecondaryButton()
     }
 }
 
