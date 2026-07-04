@@ -18,10 +18,8 @@ final class RegisterViewController: UIViewController {
 
 // MARK: - IMPLEMETING DELEGATE PROTOCOL
 extension RegisterViewController: LoginScreenDelegate {
-    
-    #warning("TODO: IMPLEMENT didTapPrimaryButton METHOD")
     func didTapPrimaryButton() {
-    
+        goToHomeScreen()
     }
     
     func didTapSecondaryButton() {
@@ -34,6 +32,13 @@ extension RegisterViewController {
     func goToLoginScreen() {
         navigationController?.pushViewController(
             LoginViewController(),
+            animated: true
+        )
+    }
+    
+    func goToHomeScreen() {
+        navigationController?.pushViewController(
+            HomeViewController(),
             animated: true
         )
     }
