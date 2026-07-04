@@ -9,6 +9,7 @@ import UIKit
 
 final class LoginScreen: UIView {
     var model = LoginModel()
+    var delegate: LoginScreenDelegate?
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -53,14 +54,14 @@ final class LoginScreen: UIView {
     private lazy var primaryButton: DSPrimaryButton = {
         return DSPrimaryButton(
             title: "Login",
-            action: {},
+            action: didTapPrimaryButton,
         )
     }()
     
     private lazy var secondaryButton: DSSecondaryButton = {
         return DSSecondaryButton(
             title: "Se registrar",
-            action: {},
+            action: didTapSecondaryButton,
         )
     }()
     
@@ -72,6 +73,10 @@ final class LoginScreen: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func setDelegateProtocol(_ delegate: LoginScreenDelegate) {
+        self.delegate = delegate
+    }
 }
 
 //MARK: - MODEL's SET METHODS
@@ -82,6 +87,17 @@ extension LoginScreen {
     
     private func setPassword(_ password: String) {
         model.password = password
+    }
+}
+
+// MARK: - ACTIONS
+extension LoginScreen {
+    private func didTapPrimaryButton() {
+        delegate?.didTapPrimaryButton()
+    }
+    
+    private func didTapSecondaryButton() {
+        delegate?.didTapSecondaryButton()
     }
 }
 
