@@ -7,18 +7,18 @@
 
 struct LoginViewModel {
     weak var state: LoginStateProtocol?
+    private let unknownErrorMessage = "Erro desconhecido"
     
     func login(_ model: LoginModel) {
         guard let state else { return }
         
-        guard FormValidatorHelper.isEmailValid(model.email) else {
-            state.loginFailed(message: "Digite um email válido")
+        if case .failure(let error) = FormValidatorHelper.isEmailValid(model.email) {
+            state.loginFailed(message: error.errorDescription ?? unknownErrorMessage)
             return
         }
         
-        guard FormValidatorHelper.isPasswordValid(model.password) else {
-            state.loginFailed(message: "Senha incorreta")
-            return
+        if case .failure(let error) = FormValidatorHelper.isPasswordValid(model.password) {
+            state.loginFailed(message: error.errorDescription ?? unknownErrorMessage)
         }
         
         state.loginSuccessed()
