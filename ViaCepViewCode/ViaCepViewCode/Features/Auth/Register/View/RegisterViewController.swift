@@ -32,6 +32,17 @@ extension RegisterViewController: RegisterScreenDelegate {
     }
 }
 
+// MARK: - IMPLEMENTING STATE PROTOCOL
+extension RegisterViewController: RegisterStateProtocol {
+    func registerSuccessed() {
+        #warning("TODO: IMPLEMENT registerSuccessed METHOD")
+    }
+    
+    func registerFailed(message: String) {
+        showAlertController(title: "ATENÇÃO!", message: message)
+    }
+}
+
 // MARK: - NAVIGATION METHODS
 extension RegisterViewController {
     func goToLoginScreen() {
