@@ -7,27 +7,27 @@
 
 struct RegisterViewModel {
     weak var state: RegisterStateProtocol?
+    private let unknownErrorMessage = "Erro desconhecido"
     
     func registerUser(_ model: RegisterModel) {
         guard let state else { return }
         
-        guard FormValidatorHelper.isValidName(model.name) else {
-            state.registerFailed(message: "Digite um nome válido")
+        if case .failure(let error) = FormValidatorHelper.isValidName(model.name) {
+            state.registerFailed(message: error.errorDescription ?? unknownErrorMessage)
             return
         }
         
-        guard FormValidatorHelper.isEmailValid(model.email) else {
-            state.registerFailed(message: "Digite um email válido")
+        if case .failure(let error) = FormValidatorHelper.isEmailValid(model.email) {
+            state.registerFailed(message: error.errorDescription ?? unknownErrorMessage)
             return
         }
         
-        guard FormValidatorHelper.isPasswordValid(model.password) else {
-            state.registerFailed(message: "Senha incorreta")
-            return
+        if case .failure(let error) = FormValidatorHelper.isPasswordValid(model.password) {
+            state.registerFailed(message: error.errorDescription ?? unknownErrorMessage)
         }
         
-        guard model.password == model.confirmPassword else {
-            state.registerFailed(message: "As senhas não coincidem")
+        if case .failure(let error) = FormValidatorHelper.isConfirmPasswordValid(password: model.password, otherPassowrd: model.confirmPassword) {
+            state.registerFailed(message: error.errorDescription ?? unknownErrorMessage)
             return
         }
         
