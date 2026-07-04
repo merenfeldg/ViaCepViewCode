@@ -8,6 +8,8 @@
 import UIKit
 
 final class RegisterScreen: UIView {
+    var model = RegisterModel()
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         
@@ -34,7 +36,8 @@ final class RegisterScreen: UIView {
         return DSTextField(
             title: "Nome",
             placeholder: "Digite seu nome...",
-            leftIcon: .envelope
+            leftIcon: .envelope,
+            onChanged: setName
         )
     }()
     
@@ -43,6 +46,7 @@ final class RegisterScreen: UIView {
             title: "Email",
             placeholder: "Digite seu email...",
             leftIcon: .lock,
+            onChanged: setEmail
         )
     }()
     
@@ -50,7 +54,8 @@ final class RegisterScreen: UIView {
         return DSTextField(
             title: "Senha",
             placeholder: "Digite sua senha...",
-            leftIcon: .envelope
+            leftIcon: .envelope,
+            onChanged: setPassword
         )
     }()
     
@@ -59,6 +64,7 @@ final class RegisterScreen: UIView {
             title: "Confirma senha",
             placeholder: "Digite a senha novamente...",
             leftIcon: .lock,
+            onChanged: setConfirmPassword
         )
     }()
     
@@ -83,6 +89,25 @@ final class RegisterScreen: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+//MARK: - MODEL's SET METHODS
+extension RegisterScreen {
+    private func setName(_ name: String) {
+        model.email = name
+    }
+    
+    private func setEmail(_ email: String) {
+        model.email = email
+    }
+    
+    private func setPassword(_ password: String) {
+        model.password = password
+    }
+    
+    private func setConfirmPassword(_ confirmPassword: String) {
+        model.password = confirmPassword
     }
 }
 
