@@ -9,16 +9,18 @@ struct LoginViewModel {
     weak var state: LoginStateProtocol?
     
     func login(_ model: LoginModel) {
+        guard let state else { return }
+        
         guard FormValidatorHelper.isEmailValid(model.email) else {
-            state?.loginFailed(message: "Digite um email válido")
+            state.loginFailed(message: "Digite um email válido")
             return
         }
         
         guard FormValidatorHelper.isPasswordValid(model.password) else {
-            state?.loginFailed(message: "Senha incorreta")
+            state.loginFailed(message: "Senha incorreta")
             return
         }
         
-        state?.loginSuccessed()
+        state.loginSuccessed()
     }
 }
