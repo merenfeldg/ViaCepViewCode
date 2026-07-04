@@ -14,10 +14,15 @@ final class RegisterViewController: UIViewController {
         screen = RegisterScreen()
         view = screen
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        screen?.setDelegateProtocol(self)
+    }
 }
 
 // MARK: - IMPLEMETING DELEGATE PROTOCOL
-extension RegisterViewController: LoginScreenDelegate {
+extension RegisterViewController: RegisterScreenDelegate {
     func didTapPrimaryButton() {
         goToHomeScreen()
     }
