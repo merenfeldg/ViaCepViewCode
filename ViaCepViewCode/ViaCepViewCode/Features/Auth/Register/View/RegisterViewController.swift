@@ -9,6 +9,7 @@ import UIKit
 
 final class RegisterViewController: BaseViewController {
     private var screen: RegisterScreen?
+    private var viewModel = RegisterViewModel()
     
     override func loadView() {
         screen = RegisterScreen()
@@ -24,7 +25,8 @@ final class RegisterViewController: BaseViewController {
 // MARK: - IMPLEMETING DELEGATE PROTOCOL
 extension RegisterViewController: RegisterScreenDelegate {
     func didTapPrimaryButton() {
-        goToHomeScreen()
+        guard let screen else { return }
+        viewModel.registerUser(screen.model)
     }
     
     func didTapSecondaryButton() {
@@ -35,7 +37,7 @@ extension RegisterViewController: RegisterScreenDelegate {
 // MARK: - IMPLEMENTING STATE PROTOCOL
 extension RegisterViewController: RegisterStateProtocol {
     func registerSuccessed() {
-        #warning("TODO: IMPLEMENT registerSuccessed METHOD")
+        goToHomeScreen()
     }
     
     func registerFailed(message: String) {
