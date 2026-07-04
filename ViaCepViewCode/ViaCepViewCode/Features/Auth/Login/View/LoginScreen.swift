@@ -8,6 +8,8 @@
 import UIKit
 
 final class LoginScreen: UIView {
+    var model = LoginModel()
+
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         
@@ -34,7 +36,8 @@ final class LoginScreen: UIView {
         return DSTextField(
             title: "Email",
             placeholder: "Digite seu email...",
-            leftIcon: .envelope
+            leftIcon: .envelope,
+            onChanged: setEmail
         )
     }()
     
@@ -43,6 +46,7 @@ final class LoginScreen: UIView {
             title: "Senha",
             placeholder: "Digite sua senha...",
             leftIcon: .lock,
+            onChanged: setPassword
         )
     }()
     
@@ -67,6 +71,17 @@ final class LoginScreen: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+//MARK: - MODEL's SET METHODS
+extension LoginScreen {
+    private func setEmail(_ email: String) {
+        model.email = email
+    }
+    
+    private func setPassword(_ password: String) {
+        model.password = password
     }
 }
 
