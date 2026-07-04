@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class LoginViewController: UIViewController {
+final class LoginViewController: BaseViewController {
     var screen: LoginScreen?
     var viewModel = LoginViewModel()
     
@@ -49,13 +49,6 @@ extension LoginViewController: LoginStateProtocol {
             title: "ATENÇÃO!",
             message: message
         )
-    }
-    
-    private func showAlertController(title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alertController.addAction(okButton)
-        present(alertController, animated: true)
     }
 }
 
