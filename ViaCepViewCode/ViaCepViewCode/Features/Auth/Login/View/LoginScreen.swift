@@ -9,7 +9,7 @@ import UIKit
 
 final class LoginScreen: UIView {
     var model = LoginModel()
-    var delegate: LoginScreenDelegate?
+    weak var delegate: LoginScreenDelegate?
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()

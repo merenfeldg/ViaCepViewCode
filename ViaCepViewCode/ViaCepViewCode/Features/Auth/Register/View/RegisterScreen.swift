@@ -9,7 +9,7 @@ import UIKit
 
 final class RegisterScreen: UIView {
     var model = RegisterModel()
-    var delegate: RegisterScreenDelegate?
+    weak var delegate: RegisterScreenDelegate?
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
