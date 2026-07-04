@@ -18,6 +18,27 @@ final class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
 }
 
+// MARK: - IMPLEMETING DELEGATE PROTOCOL
+extension LoginViewController: LoginScreenDelegate {
+    
+    #warning("TODO: IMPLEMENT didTapPrimaryButton METHOD")
+    func didTapPrimaryButton() {
+    
+    }
+    
+    func didTapSecondaryButton() {
+        goToRegisterScreen()
+    }
+}
+
+// MARK: - NAVIGATION METHODS
+extension LoginViewController {
+    func goToRegisterScreen() {
+        navigationController?.pushViewController(
+            RegisterViewController(),
+            animated: true
+        )
+    }
+}
