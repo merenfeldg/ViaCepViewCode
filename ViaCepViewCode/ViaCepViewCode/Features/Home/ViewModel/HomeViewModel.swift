@@ -9,11 +9,9 @@ import Foundation
 
 final class HomeViewModel {
     weak var state: HomeStateProtocol?
-    
-    private var cep: String = ""
     private let service = HomeService()
     
-    func fetchCEP() {
+    func fetchCEP(_ cep: String) {
         guard let state else { return }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(900)) { [weak self] in
