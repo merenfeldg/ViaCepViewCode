@@ -9,6 +9,7 @@ import UIKit
 
 final class HomeScreen: UIView {
     private var cepInputed: String = ""
+    private weak var delegate: HomeScreenDelegate?
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -52,6 +53,10 @@ final class HomeScreen: UIView {
     
     private func setCep(_ cep: String) {
         cepInputed = cep
+    }
+    
+    func setDelegateProtocol(_ delegate: HomeScreenDelegate) {
+        self.delegate = delegate
     }
 }
 
