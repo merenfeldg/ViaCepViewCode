@@ -12,6 +12,9 @@ enum FormValidatorError {
     case passwordShort
     case emailFormatInvalid
     case passwordsNotMatch
+    
+    case cepMustHasOnlyNumbers
+    case cepMustHasEightDigits
 }
 
 extension FormValidatorError: LocalizedError {
@@ -25,6 +28,11 @@ extension FormValidatorError: LocalizedError {
                 return "Email inserido está com formato inválido"
             case .passwordsNotMatch:
                 return "Digite a mesma senha nos dois campos."
+            
+            case .cepMustHasOnlyNumbers:
+                return "O CEP deve conter apenas números"
+            case .cepMustHasEightDigits:
+                return "O CEP deve conter 8 dígitos"
         }
     }
 }

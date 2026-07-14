@@ -9,6 +9,7 @@ import Foundation
 
 typealias FormResult = Result<Void, FormValidatorError>
 
+// MARK: - AUTH VALIDATIONS
 struct FormValidatorHelper {
     static func isValidName(_ name: String) -> FormResult {
         if case .failure(let error) = verifyEmptyText(name) {
@@ -51,7 +52,22 @@ struct FormValidatorHelper {
     }
 }
 
-// MARK: - SPECIFIC VERIFICATIONS
+// MARK: - CEP VALIDATION
+extension FormValidatorHelper {
+    static func isValidCEP(_ cep: String) -> FormResult {
+        if case .failure(let error) = verifyHasOnlyNumbers(cep) {
+            return .failure(error)
+        }
+        
+        if case .failure(let error) = verifyHasSixDigits(cep) {
+            return .failure(error)
+        }
+        
+        return .success(())
+    }
+}
+
+// MARK: - SPECIFIC VERIFICATIONS AUTH
 extension FormValidatorHelper {
     private static func verifyEmptyText(_ text: String) -> FormResult {
         return text.isEmpty
@@ -78,5 +94,23 @@ extension FormValidatorHelper {
         return password == otherPassword
             ? .success(())
             : .failure(.passwordsNotMatch)
+    }
+}
+
+// MARK: - SPECIFIC VERIFICATIONS CEP
+extension FormValidatorHelper {
+    private static func verifyHasOnlyNumbers(_ text: String) -> FormResult {
+        for character in text {
+            if character.isNumber == false {
+                return .failure(.cepMustHasOnlyNumbers)
+            }
+        }
+        return .success(())
+    }
+    
+    private static func verifyHasSixDigits(_ text: String) -> FormResult {
+        return text.count == 8
+            ? .success(())
+            : .failure(.cepMustHasEightDigits)
     }
 }
