@@ -74,7 +74,7 @@ final class LoginScreen: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setDelegateProtocol(_ delegate: LoginScreenDelegate) {
+    func setDelegate(_ delegate: LoginScreenDelegate) {
         self.delegate = delegate
     }
 }

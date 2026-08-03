@@ -6,21 +6,25 @@
 //
 
 struct LoginViewModel {
-    weak var state: LoginStateProtocol?
+    weak var delegate: LoginViewModelDelegate?
     private let unknownErrorMessage = "Erro desconhecido"
     
     func login(_ model: LoginModel) {
-        guard let state else { return }
+        guard let delegate else { return }
         
         if case .failure(let error) = FormValidatorHelper.isEmailValid(model.email) {
-            state.loginFailed(message: error.errorDescription ?? unknownErrorMessage)
+            delegate.didFailToLogin(message: error.errorDescription ?? unknownErrorMessage)
             return
         }
         
         if case .failure(let error) = FormValidatorHelper.isPasswordValid(model.password) {
-            state.loginFailed(message: error.errorDescription ?? unknownErrorMessage)
+            delegate.didFailToLogin(message: error.errorDescription ?? unknownErrorMessage)
         }
         
-        state.loginSuccessed()
+        delegate.didLogin()
+    }
+    
+    mutating func setDelegate(_ delegate: LoginViewModelDelegate) {
+        self.delegate = delegate
     }
 }

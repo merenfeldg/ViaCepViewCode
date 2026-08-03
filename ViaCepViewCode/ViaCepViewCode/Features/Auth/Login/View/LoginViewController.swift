@@ -18,15 +18,16 @@ final class LoginViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configProtocols()
     }
     
     private func configProtocols() {
-        screen?.setDelegateProtocol(self)
-        viewModel.state = self
+        screen?.setDelegate(self)
+        viewModel.setDelegate(self)
     }
 }
 
-// MARK: - IMPLEMETING DELEGATE PROTOCOL
+// MARK: - IMPLEMETING SCREEN DELEGATE
 extension LoginViewController: LoginScreenDelegate {
     func didTapPrimaryButton() {
         guard let screen else { return }
@@ -38,17 +39,14 @@ extension LoginViewController: LoginScreenDelegate {
     }
 }
 
-// MARK: - IMPLEMENTING STATE PROTOCOL
-extension LoginViewController: LoginStateProtocol {
-    func loginSuccessed() {
+// MARK: - IMPLEMENTING VIEW MODEL DELEGATE
+extension LoginViewController: LoginViewModelDelegate {
+    func didLogin() {
         goToHomeScreen()
     }
     
-    func loginFailed(message: String) {
-        showAlertController(
-            title: "ATENÇÃO!",
-            message: message
-        )
+    func didFailToLogin(message: String) {
+        showAlertController(title: "ATENÇÃO!", message: message)
     }
 }
 
