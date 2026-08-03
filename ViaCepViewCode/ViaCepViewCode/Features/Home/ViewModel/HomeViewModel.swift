@@ -28,4 +28,8 @@ final class HomeViewModel {
             }
         }
     }
+    
+    func setStateProtocol(_ state: HomeStateProtocol) {
+        self.state = state
+    }
 }

@@ -8,4 +8,5 @@
 protocol HomeStateProtocol: AnyObject {
     func cepSearchSuccessed(_ cep: CepModel)
     func cepSearchFailed(_ error: Error)
+    func cepNotFound()
 }

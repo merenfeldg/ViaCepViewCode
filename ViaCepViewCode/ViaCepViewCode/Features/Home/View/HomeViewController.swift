@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class HomeViewController: UIViewController {
+final class HomeViewController: BaseViewController {
     var screen: HomeScreen?
     private let viewModel = HomeViewModel()
     
@@ -18,7 +18,12 @@ final class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configProtocols()
+    }
+    
+    private func configProtocols() {
         screen?.setDelegateProtocol(self)
+        viewModel.setStateProtocol(self)
     }
 }
 
@@ -29,3 +34,20 @@ extension HomeViewController: HomeScreenDelegate {
     }
 }
 
+// MARK: - IMPLEMETING STATE PROTOCOL
+extension HomeViewController: HomeStateProtocol {
+    func cepNotFound() {
+        
+    }
+    
+    func cepSearchSuccessed(_ cep: CepModel) {
+        
+    }
+    
+    func cepSearchFailed(_ error: Error) {
+        showAlertController(
+            title: "Atenção!",
+            message: error.localizedDescription
+        )
+    }
+}
