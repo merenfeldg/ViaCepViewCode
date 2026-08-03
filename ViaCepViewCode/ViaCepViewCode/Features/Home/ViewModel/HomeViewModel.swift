@@ -7,6 +7,10 @@
 
 import Foundation
 
+private enum HTTPStatusCode: Int {
+    case notFound = 404
+}
+
 final class HomeViewModel {
     weak var delegate: HomeViewModelDelegate?
     private let service = HomeService()
@@ -23,6 +27,11 @@ final class HomeViewModel {
                         delegate.didFetchCEP(cepModel)
                     
                     case .failure(let error):
+                        if case .statusCode(let code) = error {
+                            if code == HTTPStatusCode.notFound.rawValue {
+                                delegate.didNotFindCEP()
+                            }
+                        }
                         delegate.didFailWith(error)
                 }
             }
