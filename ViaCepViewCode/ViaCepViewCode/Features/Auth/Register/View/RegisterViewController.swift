@@ -22,7 +22,7 @@ final class RegisterViewController: BaseViewController {
     }
 }
 
-// MARK: - IMPLEMETING DELEGATE PROTOCOL
+// MARK: - IMPLEMETING SCREEN DELEGATE
 extension RegisterViewController: RegisterScreenDelegate {
     func didTapPrimaryButton() {
         guard let screen else { return }
@@ -34,13 +34,13 @@ extension RegisterViewController: RegisterScreenDelegate {
     }
 }
 
-// MARK: - IMPLEMENTING STATE PROTOCOL
-extension RegisterViewController: RegisterStateProtocol {
-    func registerSuccessed() {
+// MARK: - IMPLEMENTING VIEW MODEL DELEGATE
+extension RegisterViewController: RegisterViewModelDelegate {
+    func didRegister() {
         goToHomeScreen()
     }
     
-    func registerFailed(message: String) {
+    func didFailToRegister(message: String) {
         showAlertController(title: "ATENÇÃO!", message: message)
     }
 }

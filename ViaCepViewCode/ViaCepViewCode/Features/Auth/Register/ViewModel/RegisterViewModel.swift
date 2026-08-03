@@ -6,31 +6,31 @@
 //
 
 struct RegisterViewModel {
-    weak var state: RegisterStateProtocol?
+    weak var delegate: RegisterViewModelDelegate?
     private let unknownErrorMessage = "Erro desconhecido"
     
     func registerUser(_ model: RegisterModel) {
-        guard let state else { return }
+        guard let delegate else { return }
         
         if case .failure(let error) = FormValidatorHelper.isValidName(model.name) {
-            state.registerFailed(message: error.errorDescription ?? unknownErrorMessage)
+            delegate.didFailToRegister(message: error.errorDescription ?? unknownErrorMessage)
             return
         }
         
         if case .failure(let error) = FormValidatorHelper.isEmailValid(model.email) {
-            state.registerFailed(message: error.errorDescription ?? unknownErrorMessage)
+            delegate.didFailToRegister(message: error.errorDescription ?? unknownErrorMessage)
             return
         }
         
         if case .failure(let error) = FormValidatorHelper.isPasswordValid(model.password) {
-            state.registerFailed(message: error.errorDescription ?? unknownErrorMessage)
+            delegate.didFailToRegister(message: error.errorDescription ?? unknownErrorMessage)
         }
         
         if case .failure(let error) = FormValidatorHelper.isConfirmPasswordValid(password: model.password, otherPassowrd: model.confirmPassword) {
-            state.registerFailed(message: error.errorDescription ?? unknownErrorMessage)
+            delegate.didFailToRegister(message: error.errorDescription ?? unknownErrorMessage)
             return
         }
         
-        state.registerSuccessed()
+        delegate.didRegister()
     }
 }
