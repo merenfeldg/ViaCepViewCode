@@ -22,7 +22,7 @@ final class HomeViewController: BaseViewController {
     }
     
     private func configProtocols() {
-        screen?.setDelegateProtocol(self)
+        screen?.setDelegate(self)
         viewModel.setDelegate(self)
     }
 }

@@ -55,7 +55,7 @@ final class HomeScreen: UIView {
         cepInputed = cep
     }
     
-    func setDelegateProtocol(_ delegate: HomeScreenDelegate) {
+    func setDelegate(_ delegate: HomeScreenDelegate) {
         self.delegate = delegate
     }
 }
