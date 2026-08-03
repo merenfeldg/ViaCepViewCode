@@ -8,11 +8,11 @@
 import Foundation
 
 final class HomeViewModel {
-    weak var state: HomeStateProtocol?
+    weak var delegate: HomeViewModelDelegate?
     private let service = HomeService()
     
     func fetchCEP(_ cep: String) {
-        guard let state else { return }
+        guard let delegate else { return }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(900)) { [weak self] in
             guard let self else { return }
@@ -20,16 +20,16 @@ final class HomeViewModel {
             service.fetchCEP(cep) { result in
                 switch result {
                     case .success(let cepModel):
-                        state.cepSearchSuccessed(cepModel)
+                        delegate.didFetchCEP(cepModel)
                     
                     case .failure(let error):
-                        state.cepSearchFailed(error)
+                        delegate.didFailWith(error)
                 }
             }
         }
     }
     
-    func setStateProtocol(_ state: HomeStateProtocol) {
-        self.state = state
+    func setDelegate(_ delegate: HomeViewModelDelegate) {
+        self.delegate = delegate
     }
 }

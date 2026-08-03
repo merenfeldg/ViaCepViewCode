@@ -23,31 +23,31 @@ final class HomeViewController: BaseViewController {
     
     private func configProtocols() {
         screen?.setDelegateProtocol(self)
-        viewModel.setStateProtocol(self)
+        viewModel.setDelegate(self)
     }
 }
 
-// MARK: - IMPLEMETING DELEGATE PROTOCOL
+// MARK: - IMPLEMETING SCREEN DELEGATE
 extension HomeViewController: HomeScreenDelegate {
     func searchCEP(_ cep: String) {
         viewModel.fetchCEP(cep)
     }
 }
 
-// MARK: - IMPLEMETING STATE PROTOCOL
-extension HomeViewController: HomeStateProtocol {
-    func cepNotFound() {
+// MARK: - IMPLEMETING VIEW MODEL DELEGATE
+extension HomeViewController: HomeViewModelDelegate {
+    func didFetchCEP(_ cep: CepModel) {
         
     }
     
-    func cepSearchSuccessed(_ cep: CepModel) {
-        
-    }
-    
-    func cepSearchFailed(_ error: Error) {
+    func didFailWith(_ error: NetworkError) {
         showAlertController(
             title: "Atenção!",
             message: error.localizedDescription
         )
+    }
+    
+    func didNotFindCEP() {
+        
     }
 }
