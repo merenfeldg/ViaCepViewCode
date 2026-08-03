@@ -92,7 +92,7 @@ final class RegisterScreen: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setDelegateProtocol(_ delegate: RegisterScreenDelegate) {
+    func setDelegate(_ delegate: RegisterScreenDelegate) {
         self.delegate = delegate
     }
 }

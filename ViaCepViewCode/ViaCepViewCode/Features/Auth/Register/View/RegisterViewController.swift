@@ -18,7 +18,12 @@ final class RegisterViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        screen?.setDelegateProtocol(self)
+        configProtocols()
+    }
+    
+    private func configProtocols() {
+        screen?.setDelegate(self)
+        viewModel.setDelegate(self)
     }
 }
 

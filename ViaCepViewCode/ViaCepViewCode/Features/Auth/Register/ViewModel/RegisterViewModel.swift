@@ -33,4 +33,8 @@ struct RegisterViewModel {
         
         delegate.didRegister()
     }
+    
+    mutating func setDelegate(_ delegate: RegisterViewModelDelegate) {
+        self.delegate = delegate
+    }
 }
