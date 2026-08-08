@@ -6,5 +6,5 @@
 //
 
 protocol HomeViewModelDelegate: AnyObject {
-    func didChangeState(_ state: HomeState)
+    func changeState(_ state: HomeState)
 }

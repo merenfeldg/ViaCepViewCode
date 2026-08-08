@@ -21,17 +21,17 @@ final class HomeViewModel {
         guard let delegate else { return }
         
         if case .failure(let failure) = FormValidatorHelper.isValidCEP(cep) {
-            delegate.didChangeState(.invalidCEP(message: failure.localizedDescription))
+            delegate.changeState(.invalidCEP(message: failure.localizedDescription))
             return
         }
         
         service.fetchCEP(cep) { result in
             switch result {
                 case .success(let cepModel):
-                    delegate.didChangeState(.success(cepModel))
+                    delegate.changeState(.success(cepModel))
                 
                 case .failure:
-                    delegate.didChangeState(.notFound)
+                    delegate.changeState(.notFound)
             }
         }
     }

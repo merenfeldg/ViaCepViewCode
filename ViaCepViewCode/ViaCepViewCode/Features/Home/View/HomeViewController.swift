@@ -47,15 +47,7 @@ extension HomeViewController: HomeScreenDelegate {
 
 // MARK: - IMPLEMETING VIEW MODEL DELEGATE
 extension HomeViewController: HomeViewModelDelegate {
-    func didChangeState(_ state: HomeState) {
+    func changeState(_ state: HomeState) {
         screen?.updateState(state)
     }
 }
-
-
-//        if case .failure(let message) = state {
-//            showAlertController(
-//                title: "ATENÇÃO",
-//                message: message
-//            )
-//        }
