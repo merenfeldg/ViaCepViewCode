@@ -36,13 +36,17 @@ struct HomeService {
         cep: String,
         completion: @escaping (Result<Data, NetworkError>) -> Void
     ) {
-        guard let url = URL(string: "\(baseURL)/\(cep)/json") else {
+        let urlString = "\(baseURL)\(cep)/json"
+        
+        guard let url = URL(string: urlString) else {
             completion(.failure(.invalidURL(url: "\(baseURL)/\(cep)")))
             return
         }
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let error {
+                print("❌ URLSession error:", error)
+                    print("❌ URL:", url)
                 completion(.failure(.networkFailure(error)))
                 return
             }
@@ -61,6 +65,8 @@ struct HomeService {
                 completion(.failure(.noData))
                 return
             }
+            
+            completion(.success(data))
         }
         
         task.resume()

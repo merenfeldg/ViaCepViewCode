@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>BASE_URL</key>
-	<string>viacep.com.br/ws/</string>
+	<string>https://viacep.com.br/ws/</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

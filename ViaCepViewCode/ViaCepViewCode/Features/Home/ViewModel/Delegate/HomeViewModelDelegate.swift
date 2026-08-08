@@ -6,7 +6,5 @@
 //
 
 protocol HomeViewModelDelegate: AnyObject {
-    func didFetchCEP(_ cep: CepModel)
-    func didFailWith(_ error: NetworkError)
-    func didNotFindCEP()
+    func didChangeState(_ state: HomeState)
 }

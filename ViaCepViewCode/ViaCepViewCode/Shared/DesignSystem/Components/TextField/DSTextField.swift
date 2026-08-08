@@ -89,6 +89,10 @@ final class DSTextField: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func clear() {
+        textField.text = ""
+    }
 }
 
 // MARK: - CONFIG VIEW
@@ -153,6 +157,7 @@ extension DSTextField {
     private func setupActions() {
         textField.addTarget(self, action: #selector(didBeginEditing), for: .editingDidBegin)
         textField.addTarget(self, action: #selector(didEndEditing), for: .editingDidEnd)
+        textField.addTarget(self, action: #selector(textFieldAction), for: .editingChanged)
     }
     
     @objc private func didBeginEditing() {
@@ -165,5 +170,9 @@ extension DSTextField {
         textField.layer.borderColor = UIColor.gray.cgColor
         iconImage.image = UIImage(systemName: leftIcon.outlinedIcon)
         iconImage.tintColor = .gray
+    }
+    
+    @objc private func textFieldAction() {
+        onChanged(textField.text ?? "")
     }
 }

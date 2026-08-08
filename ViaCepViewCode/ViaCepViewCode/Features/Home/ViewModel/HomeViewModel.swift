@@ -13,27 +13,28 @@ private enum HTTPStatusCode: Int {
 
 final class HomeViewModel {
     weak var delegate: HomeViewModelDelegate?
+    
     private let service = HomeService()
+    private let unknownErrorMessage = "Erro desconhecido"
     
     func fetchCEP(_ cep: String) {
         guard let delegate else { return }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(900)) { [weak self] in
-            guard let self else { return }
-            
-            service.fetchCEP(cep) { result in
-                switch result {
-                    case .success(let cepModel):
-                        delegate.didFetchCEP(cepModel)
-                    
-                    case .failure(let error):
-                        if case .statusCode(let code) = error {
-                            if code == HTTPStatusCode.notFound.rawValue {
-                                delegate.didNotFindCEP()
-                            }
+        service.fetchCEP(cep) { result in
+            switch result {
+                case .success(let cepModel):
+                    delegate.didChangeState(.success(cepModel))
+                
+                case .failure(let error):
+                    if case .statusCode(let code) = error {
+                        if code == HTTPStatusCode.notFound.rawValue {
+                            delegate.didChangeState(.notFound)
                         }
-                        delegate.didFailWith(error)
-                }
+                    }
+                
+                    delegate.didChangeState(
+                        .failure(message: error.errorDescription ?? self.unknownErrorMessage)
+                    )
             }
         }
     }

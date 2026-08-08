@@ -8,7 +8,7 @@
 import Foundation
 
 enum KeyInfo: String {
-    case baseURL = "baseURL"
+    case baseURL = "BASE_URL"
 }
 
 enum GetInfo {

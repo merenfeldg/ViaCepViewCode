@@ -32,22 +32,29 @@ extension HomeViewController: HomeScreenDelegate {
     func searchCEP(_ cep: String) {
         viewModel.fetchCEP(cep)
     }
+    
+    func didTapCEPCard(cep: CepModel?) {
+        goToDetailCEPScreen()
+    }
+    
+    private func goToDetailCEPScreen() {
+        navigationController?.pushViewController(
+            UIViewController(),
+            animated: true,
+        )
+    }
 }
 
 // MARK: - IMPLEMETING VIEW MODEL DELEGATE
 extension HomeViewController: HomeViewModelDelegate {
-    func didFetchCEP(_ cep: CepModel) {
+    func didChangeState(_ state: HomeState) {
+        if case .failure(let message) = state {
+            showAlertController(
+                title: "ATENÇÃO",
+                message: message
+            )
+        }
         
-    }
-    
-    func didFailWith(_ error: NetworkError) {
-        showAlertController(
-            title: "Atenção!",
-            message: error.localizedDescription
-        )
-    }
-    
-    func didNotFindCEP() {
-        
+        screen?.updateState(state)
     }
 }
