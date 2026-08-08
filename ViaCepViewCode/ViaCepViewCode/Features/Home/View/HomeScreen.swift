@@ -125,11 +125,11 @@ extension HomeScreen {
             case .initial:
                 configInitialState()
             
-            case .notFound:
-                configNotFoundState()
-            
             case .success(let cep):
                 configSuccessState(cep: cep)
+            
+            case .notFound:
+                configNotFoundState()
             
             case .invalidCEP(let message):
                 configInvalidCEPState(message: message)

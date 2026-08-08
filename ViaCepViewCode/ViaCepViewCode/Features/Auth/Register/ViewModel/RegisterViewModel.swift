@@ -22,11 +22,11 @@ struct RegisterViewModel {
             return
         }
         
-        if case .failure(let error) = FormValidatorHelper.isPasswordValid(model.password) {
+        if case .failure(let error) = FormValidator.isPasswordValid(model.password) {
             delegate.didFailToRegister(message: error.errorDescription ?? unknownErrorMessage)
         }
         
-        if case .failure(let error) = FormValidatorHelper.isConfirmPasswordValid(password: model.password, otherPassowrd: model.confirmPassword) {
+        if case .failure(let error) = FormValidator.isConfirmPasswordValid(password: model.password, otherPassowrd: model.confirmPassword) {
             delegate.didFailToRegister(message: error.errorDescription ?? unknownErrorMessage)
             return
         }
