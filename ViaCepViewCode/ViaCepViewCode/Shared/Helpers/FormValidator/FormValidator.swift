@@ -10,7 +10,7 @@ import Foundation
 typealias FormResult = Result<Void, FormValidatorError>
 
 // MARK: - AUTH VALIDATIONS
-struct FormValidatorHelper {
+struct FormValidator {
     static func isValidName(_ name: String) -> FormResult {
         if case .failure(let error) = verifyEmptyText(name) {
             return .failure(error)
@@ -53,7 +53,7 @@ struct FormValidatorHelper {
 }
 
 // MARK: - CEP VALIDATION
-extension FormValidatorHelper {
+extension FormValidator {
     static func isValidCEP(_ cep: String) -> FormResult {
         if case .failure(let error) = verifyHasOnlyNumbers(cep) {
             return .failure(error)
@@ -68,7 +68,7 @@ extension FormValidatorHelper {
 }
 
 // MARK: - SPECIFIC VERIFICATIONS AUTH
-extension FormValidatorHelper {
+extension FormValidator {
     private static func verifyEmptyText(_ text: String) -> FormResult {
         return text.isEmpty
             ? .failure(.emptyText)
@@ -98,7 +98,7 @@ extension FormValidatorHelper {
 }
 
 // MARK: - SPECIFIC VERIFICATIONS CEP
-extension FormValidatorHelper {
+extension FormValidator {
     private static func verifyHasOnlyNumbers(_ text: String) -> FormResult {
         for character in text {
             if character.isNumber == false {

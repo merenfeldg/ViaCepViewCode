@@ -12,12 +12,12 @@ struct LoginViewModel {
     func login(_ model: LoginModel) {
         guard let delegate else { return }
         
-        if case .failure(let error) = FormValidatorHelper.isEmailValid(model.email) {
+        if case .failure(let error) = FormValidator.isEmailValid(model.email) {
             delegate.didFailToLogin(message: error.errorDescription ?? unknownErrorMessage)
             return
         }
         
-        if case .failure(let error) = FormValidatorHelper.isPasswordValid(model.password) {
+        if case .failure(let error) = FormValidator.isPasswordValid(model.password) {
             delegate.didFailToLogin(message: error.errorDescription ?? unknownErrorMessage)
         }
         

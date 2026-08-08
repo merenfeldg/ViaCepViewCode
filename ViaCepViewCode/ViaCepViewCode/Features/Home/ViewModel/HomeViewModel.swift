@@ -14,7 +14,7 @@ final class HomeViewModel {
     func fetchCEP(_ cep: String) {
         guard let delegate else { return }
         
-        if case .failure(let failure) = FormValidatorHelper.isValidCEP(cep) {
+        if case .failure(let failure) = FormValidator.isValidCEP(cep) {
             delegate.changeState(.invalidCEP(message: failure.localizedDescription))
             return
         }

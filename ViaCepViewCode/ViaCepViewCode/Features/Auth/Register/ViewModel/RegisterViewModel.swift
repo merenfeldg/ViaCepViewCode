@@ -12,12 +12,12 @@ struct RegisterViewModel {
     func registerUser(_ model: RegisterModel) {
         guard let delegate else { return }
         
-        if case .failure(let error) = FormValidatorHelper.isValidName(model.name) {
+        if case .failure(let error) = FormValidator.isValidName(model.name) {
             delegate.didFailToRegister(message: error.errorDescription ?? unknownErrorMessage)
             return
         }
         
-        if case .failure(let error) = FormValidatorHelper.isEmailValid(model.email) {
+        if case .failure(let error) = FormValidator.isEmailValid(model.email) {
             delegate.didFailToRegister(message: error.errorDescription ?? unknownErrorMessage)
             return
         }

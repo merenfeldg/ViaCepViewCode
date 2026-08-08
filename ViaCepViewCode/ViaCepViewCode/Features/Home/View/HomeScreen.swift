@@ -18,6 +18,7 @@ final class HomeScreen: UIView {
     private var cepFetched: CepModel?
     private weak var delegate: HomeScreenDelegate?
     
+    // MARK: - COMPONENTS
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         
@@ -78,6 +79,7 @@ final class HomeScreen: UIView {
         return stack
     }()
     
+    // MARK: - CONSTRUCTORS
     init() {
         super.init(frame: .zero)
         configView()
@@ -87,6 +89,7 @@ final class HomeScreen: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - AUXILIARY METHODS
     func setDelegate(_ delegate: HomeScreenDelegate) {
         self.delegate = delegate
     }
