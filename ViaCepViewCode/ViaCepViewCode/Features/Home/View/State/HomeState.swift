@@ -7,7 +7,7 @@
 
 enum HomeState {
     case initial
-    case notFound
     case success(CepModel)
-    case failure(message: String)
+    case invalidCEP(message: String)
+    case notFound
 }

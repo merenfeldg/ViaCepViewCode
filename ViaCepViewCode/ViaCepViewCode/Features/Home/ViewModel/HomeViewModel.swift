@@ -20,21 +20,18 @@ final class HomeViewModel {
     func fetchCEP(_ cep: String) {
         guard let delegate else { return }
         
+        if case .failure(let failure) = FormValidatorHelper.isValidCEP(cep) {
+            delegate.didChangeState(.invalidCEP(message: failure.localizedDescription))
+            return
+        }
+        
         service.fetchCEP(cep) { result in
             switch result {
                 case .success(let cepModel):
                     delegate.didChangeState(.success(cepModel))
                 
-                case .failure(let error):
-                    if case .statusCode(let code) = error {
-                        if code == HTTPStatusCode.notFound.rawValue {
-                            delegate.didChangeState(.notFound)
-                        }
-                    }
-                
-                    delegate.didChangeState(
-                        .failure(message: error.errorDescription ?? self.unknownErrorMessage)
-                    )
+                case .failure:
+                    delegate.didChangeState(.notFound)
             }
         }
     }

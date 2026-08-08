@@ -42,7 +42,13 @@ final class HomeScreen: UIView {
     
     private lazy var cepPreviewCard = CEPPreviewCard(didTap: didTapCEPCard)
     
-    private lazy var notFoundCEPView = NotFoundCEPView()
+    private lazy var notFoundCEPView = MessageErrorCEPView(
+        icon: .notFound,
+        title: "CEP não encontrado",
+        message: "Confira o CEP digitado e tente novamente"
+    )
+    
+    private lazy var invalidCEPView = MessageErrorCEPView(icon: .invalidCEP)
     
     private lazy var cancelIconButton = IconButton(
         icon: .cancel,
@@ -122,26 +128,40 @@ extension HomeScreen {
             case .success(let cep):
                 configSuccessState(cep: cep)
             
-            default:
-                break
+            case .invalidCEP(let message):
+                configInvalidCEPState(message: message)
         }
     }
     
     private func configInitialState() {
         searchCEPTextField.clear()
+        invalidCEPView.isHidden = true
         cepPreviewCard.isHidden = true
         notFoundCEPView.isHidden = true
     }
     
     private func configSuccessState(cep: CepModel) {
         notFoundCEPView.isHidden = true
+        invalidCEPView.isHidden = true
+        
         cepPreviewCard.configure(cep: cep.cep, adress: cep.adress)
         cepFetched = cep
         cepPreviewCard.isHidden = false
     }
     
+    private func configInvalidCEPState(message: String) {
+        cepPreviewCard.isHidden = true
+        notFoundCEPView.isHidden = true
+        
+        invalidCEPView.configure(title: "CEP Inválido", message: message)
+        invalidCEPView.isHidden = false
+    }
+    
     private func configNotFoundState() {
         cepPreviewCard.isHidden = true
+        invalidCEPView.isHidden = true
+        
+        notFoundCEPView.isHidden = false
     }
 }
 
@@ -155,6 +175,7 @@ extension HomeScreen {
         
         cepPreviewCard.isHidden = true
         notFoundCEPView.isHidden = true
+        invalidCEPView.isHidden = true
     }
     
     private func addElements() {
@@ -163,6 +184,7 @@ extension HomeScreen {
         
         addSubview(cepPreviewCard)
         addSubview(notFoundCEPView)
+        addSubview(invalidCEPView)
         
         addSubview(stackHorizontal)
         stackHorizontal.addArrangedSubview(cancelIconButton)
@@ -193,6 +215,10 @@ extension HomeScreen {
             notFoundCEPView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 24),
             notFoundCEPView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             notFoundCEPView.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+            
+            invalidCEPView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 24),
+            invalidCEPView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            invalidCEPView.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
             
             stackHorizontal.bottomAnchor.constraint(equalTo: keyboardLayoutGuide.topAnchor, constant: -40),
             stackHorizontal.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),

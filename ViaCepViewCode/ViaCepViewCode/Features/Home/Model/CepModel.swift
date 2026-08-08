@@ -8,12 +8,12 @@
 struct CepModel: Decodable {
     let cep: String
     let adress: String
-    let complement: String
-    let neighborhood: String
-    let city: String
-    let state: String
-    let region: String
-    let ddd: String
+    let complement: String?
+    let neighborhood: String?
+    let city: String?
+    let state: String?
+    let region: String?
+    let ddd: String?
     
     private enum CodingKeys: String, CodingKey {
         case cep, ddd

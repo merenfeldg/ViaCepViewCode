@@ -8,7 +8,16 @@
 
 import UIKit
 
-final class NotFoundCEPView: UIView {
+enum MessageErrorIcons: String {
+    case notFound = "exclamationmark.triangle.fill"
+    case invalidCEP = "exclamationmark.circle.fill"
+}
+
+final class MessageErrorCEPView: UIView {
+    private let icon: MessageErrorIcons
+    private var title: String
+    private var message: String
+    
     private lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()
         let configuration = UIImage.SymbolConfiguration(
@@ -17,7 +26,7 @@ final class NotFoundCEPView: UIView {
         )
         
         imageView.image = UIImage(
-            systemName: "exclamationmark.triangle.fill",
+            systemName: icon.rawValue,
             withConfiguration: configuration
         )
         
@@ -30,7 +39,7 @@ final class NotFoundCEPView: UIView {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         
-        label.text = "CEP não encontrado"
+        label.text = title
         label.textColor = .black
         label.textAlignment = .center
         label.font = .boldSystemFont(ofSize: 20)
@@ -41,7 +50,7 @@ final class NotFoundCEPView: UIView {
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         
-        label.text = "Confira os números e tente novamente"
+        label.text = message
         label.textColor = .gray
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 16)
@@ -67,7 +76,15 @@ final class NotFoundCEPView: UIView {
         return stack
     }()
     
-    init() {
+    init(
+        icon: MessageErrorIcons,
+        title: String = "",
+        message: String = ""
+    ) {
+        self.icon = icon
+        self.title = title
+        self.message = message
+        
         super.init(frame: .zero)
         configView()
     }
@@ -75,10 +92,15 @@ final class NotFoundCEPView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func configure(title: String, message: String) {
+        titleLabel.text = title
+        descriptionLabel.text = message
+    }
 }
 
 //MARK: - CONFIG VIEW
-extension NotFoundCEPView {
+extension MessageErrorCEPView {
     private func configView() {
         addElements()
         disableTranslatesAutoreszingMaskInAllElements()
