@@ -56,14 +56,12 @@ final class HomeScreen: UIView {
         didTap: emitInitialState
     )
     
-    private lazy var searchCEPTextField: DSTextField = {
-        return DSTextField(
-            placeholder: "Digite o CEP...",
-            leftIcon: .search,
-            keyBoardType: .numberPad,
-            onChanged: setCep
-        )
-    }()
+    private lazy var searchCEPTextField = DSTextField(
+        placeholder: "Digite o CEP...",
+        leftIcon: .search,
+        keyBoardType: .numberPad,
+        onChanged: setCep
+    )
     
     private lazy var sendIconButton = IconButton(
         icon: .send,
@@ -118,6 +116,68 @@ extension HomeScreen {
     }
 }
 
+// MARK: - CONFIG VIEW
+extension HomeScreen {
+    private func configView() {
+        backgroundColor = .white
+        addElements()
+        disableTranslatesAutoresizingMaskInAllElements()
+        configConstraints()
+        
+        cepPreviewCard.isHidden = true
+        notFoundCEPView.isHidden = true
+        invalidCEPView.isHidden = true
+    }
+    
+    private func addElements() {
+        addSubview(titleLabel)
+        addSubview(descriptionLabel)
+        
+        addSubview(cepPreviewCard)
+        addSubview(notFoundCEPView)
+        addSubview(invalidCEPView)
+        
+        addSubview(stackHorizontal)
+        stackHorizontal.addArrangedSubview(cancelIconButton)
+        stackHorizontal.addArrangedSubview(searchCEPTextField)
+        stackHorizontal.addArrangedSubview(sendIconButton)
+    }
+    
+    private func disableTranslatesAutoresizingMaskInAllElements() {
+        subviews.forEach { element in
+            element.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
+    
+    private func configConstraints() {
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            
+            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
+            descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            descriptionLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+            
+            cepPreviewCard.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 24),
+            cepPreviewCard.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            cepPreviewCard.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+            
+            notFoundCEPView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 24),
+            notFoundCEPView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            notFoundCEPView.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+            
+            invalidCEPView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 24),
+            invalidCEPView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            invalidCEPView.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+            
+            stackHorizontal.bottomAnchor.constraint(equalTo: keyboardLayoutGuide.topAnchor, constant: -24),
+            stackHorizontal.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            stackHorizontal.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor)
+        ])
+    }
+}
+
 // MARK: - CONFIG STATES
 extension HomeScreen {
     func renderState(_ state: HomeState) {
@@ -168,66 +228,5 @@ extension HomeScreen {
     }
 }
 
-// MARK: - CONFIG VIEW
-extension HomeScreen {
-    private func configView() {
-        backgroundColor = .white
-        addElements()
-        disableTranslatesAutoresizingMaskInAllElements()
-        configConstraints()
-        
-        cepPreviewCard.isHidden = true
-        notFoundCEPView.isHidden = true
-        invalidCEPView.isHidden = true
-    }
-    
-    private func addElements() {
-        addSubview(titleLabel)
-        addSubview(descriptionLabel)
-        
-        addSubview(cepPreviewCard)
-        addSubview(notFoundCEPView)
-        addSubview(invalidCEPView)
-        
-        addSubview(stackHorizontal)
-        stackHorizontal.addArrangedSubview(cancelIconButton)
-        stackHorizontal.addArrangedSubview(searchCEPTextField)
-        stackHorizontal.addArrangedSubview(sendIconButton)
-    }
-    
-    private func disableTranslatesAutoresizingMaskInAllElements() {
-        subviews.forEach { element in
-            element.translatesAutoresizingMaskIntoConstraints = false
-        }
-    }
-    
-    private func configConstraints() {
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 80),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            
-            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            descriptionLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
-            
-            cepPreviewCard.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 24),
-            cepPreviewCard.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            cepPreviewCard.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
-            
-            notFoundCEPView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 24),
-            notFoundCEPView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            notFoundCEPView.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
-            
-            invalidCEPView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 24),
-            invalidCEPView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            invalidCEPView.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
-            
-            stackHorizontal.bottomAnchor.constraint(equalTo: keyboardLayoutGuide.topAnchor, constant: -40),
-            stackHorizontal.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            stackHorizontal.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor)
-        ])
-    }
-}
 
 
