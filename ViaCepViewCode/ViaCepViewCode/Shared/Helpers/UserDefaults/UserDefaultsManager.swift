@@ -26,6 +26,10 @@ final class UserDefaultsManager {
         userDefauts.setValue(value, forKey: key.rawValue)
     }
     
+    func getObject<T>(forKey key: UserDefaultsKey) -> T? {
+        return userDefauts.object(forKey: key.rawValue) as? T
+    }
+    
     func getString(forKey key: UserDefaultsKey) -> String? {
         return userDefauts.string(forKey: key.rawValue)
     }

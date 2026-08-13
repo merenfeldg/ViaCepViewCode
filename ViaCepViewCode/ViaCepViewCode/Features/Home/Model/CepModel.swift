@@ -5,7 +5,7 @@
 //  Created by Gabriel Merenfeld on 07/07/26.
 //
 
-struct CepModel: Decodable {
+struct CepModel: Codable {
     let cep: String
     let adress: String
     let complement: String?
