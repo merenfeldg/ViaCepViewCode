@@ -10,6 +10,7 @@ import Foundation
 enum UserDefaultsKey: String {
     case isUserLoggedIn = "isUserLoggedIn"
     case name = "userName"
+    case latestCEPs = "latestCEPs"
 }
 
 final class UserDefaultsManager {
@@ -31,5 +32,9 @@ final class UserDefaultsManager {
     
     func getBool(forKey key: UserDefaultsKey) -> Bool {
         return userDefauts.bool(forKey: key.rawValue)
+    }
+    
+    func clear(key: UserDefaultsKey) {
+        userDefauts.removeObject(forKey: key.rawValue)
     }
 }
