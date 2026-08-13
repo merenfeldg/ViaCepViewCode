@@ -9,7 +9,6 @@ import Foundation
 
 enum UserDefaultsKey: String {
     case isUserLoggedIn = "isUserLoggedIn"
-    case email = "userEmail"
     case name = "userName"
 }
 
