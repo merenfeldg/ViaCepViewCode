@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "goias_flag.png",
+      "filename" : "goaias2_flag.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "goias_flag 1.png",
+      "filename" : "goaias2_flag 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "goias_flag 2.png",
+      "filename" : "goaias2_flag 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
