@@ -14,7 +14,7 @@ class CEPDetailScreen: UIView {
     
     private lazy var header = CEPHeaderViewSubview(
         flag: .brazil,
-        state: cep.state ?? defaultMessage,
+        city: cep.city ?? defaultMessage,
         cep: cep.cep
     )
     

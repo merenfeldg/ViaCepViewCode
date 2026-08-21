@@ -9,7 +9,7 @@ import UIKit
 
 final class CEPHeaderViewSubview: UIView {
     var flag: DSFlag
-    let state: String
+    let city: String
     let cep: String
     
     private lazy var flags = FlagsComponent(flag: flag)
@@ -17,7 +17,7 @@ final class CEPHeaderViewSubview: UIView {
     private lazy var stateLabel: UILabel = {
         let label = UILabel()
         
-        label.text = state
+        label.text = city
         label.font = .boldSystemFont(ofSize: 20)
         label.textColor = .black
         
@@ -46,11 +46,11 @@ final class CEPHeaderViewSubview: UIView {
     
     init(
         flag: DSFlag,
-        state: String,
+        city: String,
         cep: String
     ) {
         self.flag = flag
-        self.state = state
+        self.city = city
         self.cep = cep
         
         super.init(frame: .zero)
