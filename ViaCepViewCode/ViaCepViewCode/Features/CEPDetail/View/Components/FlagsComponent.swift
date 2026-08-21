@@ -8,7 +8,7 @@
 import UIKit
 
 class FlagsComponent: UIView {
-    let flag: DSFlag
+    var flag: DSFlag
     
     private lazy var brazilFlagImageView: UIImageView = {
         let imageView = UIImageView()
@@ -46,6 +46,10 @@ class FlagsComponent: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func updateFlag(_ newFlag: DSFlag) {
+        stateFlagImageView.image = newFlag.image
     }
 }
 

@@ -8,7 +8,7 @@
 import UIKit
 
 final class CEPHeaderViewSubview: UIView {
-    let flag: DSFlag
+    var flag: DSFlag
     let state: String
     let cep: String
     
@@ -59,6 +59,10 @@ final class CEPHeaderViewSubview: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func updateFlag(_ flag: DSFlag) {
+        flags.updateFlag(flag)
     }
 }
 

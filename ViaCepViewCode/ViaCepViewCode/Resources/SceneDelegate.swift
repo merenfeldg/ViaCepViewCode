@@ -11,13 +11,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
+    var cepModel = CepModel(
+        cep: "22420-030",
+        adress: "Rua Joana Angélica",
+        complement: "",
+        neighborhood: "Ipanema",
+        city: "Rio de Janeiro",
+        state: "Rio de Janeiro",
+        region: "Sudeste",
+        ddd: "21",
+        stateAbbreviation: "RJ"
+    )
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         
-        let initialViewController = CEPDetailViewController()
+        let initialViewController = CEPDetailViewController(cep: cepModel)
         window?.rootViewController = initialViewController
         window?.makeKeyAndVisible()
     }

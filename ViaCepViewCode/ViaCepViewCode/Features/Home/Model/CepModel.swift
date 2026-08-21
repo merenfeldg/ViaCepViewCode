@@ -14,6 +14,7 @@ struct CepModel: Codable {
     let state: String?
     let region: String?
     let ddd: String?
+    let stateAbbreviation: String?
     
     private enum CodingKeys: String, CodingKey {
         case cep, ddd
@@ -23,5 +24,6 @@ struct CepModel: Codable {
         case city = "localidade"
         case state = "estado"
         case region = "regiao"
+        case stateAbbreviation = "uf"
     }
 }
