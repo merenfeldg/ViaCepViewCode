@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum DSFlag: String {
+enum DSFlag: String, CaseIterable {
     case brazil = "brasil_flag"
     case acre = "acre_flag"
     case alagoas = "alagoas_flag"
@@ -39,5 +39,66 @@ enum DSFlag: String {
 
     var image: UIImage? {
         UIImage(named: rawValue)
+    }
+    
+    var name: String {
+        switch self {
+            case .acre: 
+                return "Acre"
+            case .alagoas: 
+                return "Alagoas"
+            case .amapa: 
+                return "Amapá"
+            case .amazonas: 
+                return "Amazonas"
+            case .bahia: 
+                return "Bahia"
+            case .brazil: 
+                return "Brasil"
+            case .ceara: 
+                return "Ceará"
+            case .distritoFederal: 
+                return "Distrito Federal"
+            case .espiritoSanto: 
+                return "Espírito Santo"
+            case .goias: 
+                return "Goiás"
+            case .maranhao: 
+                return "Maranhão"
+            case .matoGrosso: 
+                return "Mato Grosso"
+            case .matoGrossoDoSul: 
+                return "Mato Grosso do Sul"
+            case .minasGerais: 
+                return "Minas Gerais"
+            case .para: 
+                return "Pará"
+            case .paraiba: 
+                return "Paraíba"
+            case .parana: 
+                return "Paraná"
+            case .pernambuco: 
+                return "Pernambuco"
+            case .piaui: 
+                return "Piauí"
+            case .rioDeJaneiro: 
+                return "Rio de Janeiro"
+            case .rioGrandeDoNorte: 
+                return "Rio Grande do Norte"
+            case .rioGrandeDoSul: 
+                return "Rio Grande do Sul"
+            case .rondonia: 
+                return "Rondônia"
+            case .roraima: 
+                return "Roraima"
+            case .santaCatarina:
+                return "Santa Catarina"
+            case .saoPaulo: 
+                return "São Paulo"
+            case .sergipe: 
+                return "Sergipe"
+            case .tocantins: 
+                return "Tocantins"
+        }
     }
 }
