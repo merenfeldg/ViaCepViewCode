@@ -10,24 +10,23 @@ import UIKit
 class CEPDetailScreen: UIView {
     private let cep: CepModel
     private weak var delegate: CEPDetailScreenDelegate?
-    private let defaultMessage = "Não informado"
     
     private lazy var header = CEPHeaderViewSubview(
         flag: .brazil,
-        city: cep.city ?? defaultMessage,
+        city: cep.city,
         cep: cep.cep
     )
     
     private lazy var adressSection = AdressSectionSubview(
-        street: cep.adress,
-        neighborhood: cep.neighborhood ?? defaultMessage,
-        stateAbbreviation: cep.stateAbbreviation ?? defaultMessage
+        street: cep.adress ?? "Rua não encontrada",
+        neighborhood: cep.neighborhood ?? "Bairro não encontrado",
+        stateAbbreviation: cep.stateAbbreviation
     )
     
     private lazy var locationSection = LocationDetailSubview(
-        state: cep.state ?? defaultMessage,
-        region: cep.region ?? defaultMessage,
-        ddd: cep.ddd ?? defaultMessage
+        state: cep.state,
+        region: cep.region,
+        ddd: cep.ddd ?? "DDD não encontrado"
     )
     
     init(cep: CepModel) {
@@ -43,7 +42,7 @@ class CEPDetailScreen: UIView {
     func setDelegate(_ delegate: CEPDetailScreenDelegate) {
         self.delegate = delegate
         
-        let flag = delegate.findStateFlag(from: cep.state ?? "")
+        let flag = delegate.findStateFlag(from: cep.state)
         header.updateFlag(flag)
     }
 }

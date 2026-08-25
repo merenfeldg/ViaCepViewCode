@@ -7,5 +7,5 @@
 
 protocol HomeScreenDelegate: AnyObject {
     func searchCEP(_ cep: String)
-    func didTapCEPCard(cep: CepModel?)
+    func didTapCEPCard(cep: CepModel)
 }

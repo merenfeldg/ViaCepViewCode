@@ -33,13 +33,13 @@ extension HomeViewController: HomeScreenDelegate {
         viewModel.fetchCEP(cep)
     }
     
-    func didTapCEPCard(cep: CepModel?) {
-        goToDetailCEPScreen()
+    func didTapCEPCard(cep: CepModel) {
+        goToDetailCEPScreen(cep: cep)
     }
     
-    private func goToDetailCEPScreen() {
+    private func goToDetailCEPScreen(cep: CepModel) {
         navigationController?.pushViewController(
-            UIViewController(),
+            CEPDetailViewController(cep: cep),
             animated: true,
         )
     }

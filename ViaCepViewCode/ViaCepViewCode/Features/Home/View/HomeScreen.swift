@@ -100,6 +100,7 @@ final class HomeScreen: UIView {
 // MARK: - ACTIONS
 extension HomeScreen {
     func didTapCEPCard() {
+        guard let cepFetched else { return }
         delegate?.didTapCEPCard(cep: cepFetched)
     }
     
@@ -201,13 +202,18 @@ extension HomeScreen {
         invalidCEPView.isHidden = true
         cepPreviewCard.isHidden = true
         notFoundCEPView.isHidden = true
+        cepFetched = nil
     }
     
     private func configSuccessState(cep: CepModel) {
         notFoundCEPView.isHidden = true
         invalidCEPView.isHidden = true
         
-        cepPreviewCard.configure(cep: cep.cep, adress: cep.adress)
+        cepPreviewCard.configure(
+            cep: cep.cep,
+            adress: cep.adress ?? "Rua não encontrada"
+        )
+        
         cepFetched = cep
         cepPreviewCard.isHidden = false
     }
