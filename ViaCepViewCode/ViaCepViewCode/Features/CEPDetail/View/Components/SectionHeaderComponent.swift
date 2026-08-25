@@ -24,7 +24,7 @@ enum TypesSectionHeader {
     var icon: String {
         switch self {
             case .adress:
-                return "mappin.circle"
+                return "location"
             case .location:
                 return "globe.americas.fill"
         }
