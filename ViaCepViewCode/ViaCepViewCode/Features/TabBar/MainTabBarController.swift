@@ -11,8 +11,8 @@ final class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         createTabBarItem(
             viewController: HomeViewController(),
-            title: "Buscar",
-            imageString: "magnifyingglass"
+            title: "Início",
+            imageString: "house"
         )
         
         createTabBarItem(
