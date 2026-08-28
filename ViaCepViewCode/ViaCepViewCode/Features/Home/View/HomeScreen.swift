@@ -43,13 +43,13 @@ final class HomeScreen: UIView {
     
     private lazy var cepPreviewCard = CEPPreviewCard(didTap: didTapCEPCard)
     
-    private lazy var notFoundCEPView = MessageErrorCEPView(
+    private lazy var notFoundCEPView = DSMessageErrorSubView(
         icon: .notFound,
         title: "CEP não encontrado",
         message: "Confira o CEP digitado e tente novamente"
     )
     
-    private lazy var invalidCEPView = MessageErrorCEPView(icon: .invalidCEP)
+    private lazy var invalidCEPView = DSMessageErrorSubView(icon: .invalidCEP)
     
     private lazy var cancelIconButton = IconButton(
         icon: .cancel,

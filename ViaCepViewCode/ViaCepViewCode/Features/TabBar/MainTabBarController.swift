@@ -16,7 +16,7 @@ final class MainTabBarController: UITabBarController {
         )
         
         createTabBarItem(
-            viewController: UIViewController(),
+            viewController: SearchHistoryViewController(),
             title: "Histórico",
             imageString: "clock.arrow.circlepath"
         )
